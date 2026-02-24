@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("io.appium:java-client:9.4.0")
+    implementation("io.cucumber:cucumber-java:7.34.2")
+    implementation("io.cucumber:cucumber-junit:7.34.2")
+    testImplementation("junit:junit:4.13.2")
+
+}
+
+test {
+    useJUnit()
+}
