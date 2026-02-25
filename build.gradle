@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'org.example'
+group = 'com.edwardjones.mobile'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -10,13 +10,25 @@ repositories {
 }
 
 dependencies {
-    implementation("io.appium:java-client:9.4.0")
-    implementation("io.cucumber:cucumber-java:7.34.2")
-    implementation("io.cucumber:cucumber-junit:7.34.2")
-    testImplementation("junit:junit:4.13.2")
 
+    // Appium (includes Selenium)
+    implementation 'io.appium:java-client:8.6.0'
+
+    // Cucumber
+    testImplementation 'io.cucumber:cucumber-java:7.14.0'
+    testImplementation 'io.cucumber:cucumber-junit:7.14.0'
+
+    // JUnit 4
+    testImplementation 'junit:junit:4.13.2'
+
+    // Assertions
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+
+    // Logging
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
 }
 
 test {
     useJUnit()
+    systemProperties System.getProperties()
 }
