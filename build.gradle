@@ -2,23 +2,30 @@ plugins {
     id 'java'
 }
 
-group = 'com.edwardjones.mobile'
+group = 'com.dcxmobile'
 version = '1.0-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
 }
 
+// NO resolutionStrategy - using compatible versions directly
+// Appium 8.3.0 + Selenium 4.12.0 = TESTED WORKING PAIR
+
 dependencies {
 
-    // Appium (includes Selenium)
-    implementation 'io.appium:java-client:8.6.0'
+    // Appium + Selenium COMPATIBLE PAIR - do not change these versions
+    implementation 'io.appium:java-client:8.3.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.12.0'
 
-    // Cucumber
+    // Cucumber BDD
     testImplementation 'io.cucumber:cucumber-java:7.14.0'
     testImplementation 'io.cucumber:cucumber-junit:7.14.0'
 
-    // JUnit 4
+    // JUnit 4 - required by Cucumber
     testImplementation 'junit:junit:4.13.2'
 
     // Assertions
@@ -26,9 +33,25 @@ dependencies {
 
     // Logging
     implementation 'org.slf4j:slf4j-simple:2.0.9'
+
+    // REST Assured for qTest API
+    implementation 'io.rest-assured:rest-assured:5.3.2'
+
+    // JSON Processing
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
+    // Screenshot support
+    implementation 'commons-io:commons-io:2.15.1'
+
+    // Extent Reports for HTML reporting
+    implementation 'com.aventstack:extentreports:5.0.9'
 }
 
 test {
     useJUnit()
     systemProperties System.getProperties()
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
 }
